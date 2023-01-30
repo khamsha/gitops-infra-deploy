@@ -1,0 +1,6 @@
+spec:
+  source:
+    repoURL: https://akhamatshin.gitlab.yandexcloud.net/yc-courses/argocd.git
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
