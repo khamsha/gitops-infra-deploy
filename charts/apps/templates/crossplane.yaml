@@ -26,3 +26,9 @@ spec:
         - secrets+age-import:///helm-secrets-private-keys/key.txt?../../values/crossplane.yaml
   syncPolicy:
     automated: {}
+  ignoreDifferences:
+    - kind: ClusterRole # в каких сущностях игнорировать
+      group: rbac.authorization.k8s.io # из какой группы сущности
+      name: crossplane # имя конкретной сущности
+      jsonPointers:
+        - /rules # путь до игнорируемого поля 
