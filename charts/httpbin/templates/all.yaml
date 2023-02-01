@@ -48,10 +48,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "httpbin.infra.<домен>"
+        - "httpbin.infra.familygram.online"
       secretName: yc-certmgr-cert-id-{{ .Values.certificateId }}
   rules:
-    - host: httpbin.infra.<домен>
+    - host: httpbin.infra.familygram.online
       http:
         paths:
           - path: /
