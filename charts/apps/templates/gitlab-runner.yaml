@@ -18,7 +18,7 @@ spec:
     # А вот тут уже неймспейс, куда будет устанавливаться сам чарт
     namespace: gitlab-runner
     server: {{ .Values.spec.destination.server }}
-  project: argocd
+  project: default
   source:
     # Указываем путь до чарта
     path: charts/gitlab-runner
