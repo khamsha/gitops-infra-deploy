@@ -1,0 +1,45 @@
+apiVersion: mdb.yandex-cloud.jet.crossplane.io/v1alpha1
+kind: PostgresqlCluster
+metadata:
+  name: {{ include "postgresFullName" . }}
+spec:
+  forProvider:
+    # задаем имя кластера
+    name: {{ include "postgresFullName" . }}
+    # задаем каталог
+    folderIdRef:
+      name: default
+    # задаем сеть
+    networkIdRef:
+      name: default
+    securityGroupIdsRefs:
+      - name: {{ .Values.securityGroup }}
+    config:
+      - resources:
+            # указываем размер диска
+          - diskSize: {{ .Values.diskSize }}
+            # указываем тип инстанса, их можно посмотреть с помощью команды
+            # yc postgres resource-preset list
+            resourcePresetId: {{ .Values.resourcePresetId }}
+            # задаем тип диска
+            diskTypeId: {{ .Values.diskTypeId }}
+        # указываем версию Posgtres
+        version: "{{ .Values.postgresVersion }}"
+    database:
+      # Создаем базу данных
+      - name: {{ .Values.dbName }}
+        owner: {{ .Values.dbUser }}
+    # Указываем окружение
+    environment: PRODUCTION
+    host:
+      # задаем зону, в которой будет расположен кластер
+      - zone: {{ .Values.postgresZone }}
+
+    user:
+      # создаем пользователя
+      - name: {{ .Values.dbUser }}
+        # указываем секрет, из которого брать пароль для создания пользователя
+        passwordSecretRef:
+          key: password
+          name: {{ include "postgresFullName" . }}-creds
+          namespace: {{ .Values.infraNamespace }}
