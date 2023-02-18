@@ -61,3 +61,29 @@ spec:
                 name: httpbin
                 port:
                   number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpbin-tls
+  annotations:
+    ingress.alb.yc.io/subnets: {{ .Values.subnetId }}
+    ingress.alb.yc.io/external-ipv4-address: {{ .Values.ingressIp }}
+    ingress.alb.yc.io/group-name: {{ .Values.ingressGroup }}
+    ingress.alb.yc.io/security-groups: {{ .Values.securityGroup }}
+spec:
+  tls:
+    - hosts:
+        - {{ .Values.ingressHost }}
+      secretName: yc-certmgr-cert-id-{{ .Values.certificateId }}
+  rules:
+    - host: {{ .Values.ingressHost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: httpbin
+                port:
+                  number: 80 

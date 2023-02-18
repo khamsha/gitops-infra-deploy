@@ -1,0 +1,29 @@
+kind: Recordset
+apiVersion: dns.yandex-cloud.jet.crossplane.io/v1alpha1
+metadata:
+  name: apps
+spec:
+  deletionPolicy: Orphan  # не забывайте проставлять deletionPolicy
+  forProvider:
+    data:
+      - "51.250.16.58"
+    name: "*.apps.familygram.online."
+    ttl: 600
+    type: A
+    zoneIdRef:
+      name: yc-courses
+---
+kind: Recordset
+apiVersion: dns.yandex-cloud.jet.crossplane.io/v1alpha1
+metadata:
+  name: apps-cert-challenge
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    data:
+      - "fpq7m8lo1dflisj1kllp.cm.yandexcloud.net."
+    name: "_acme-challenge.apps.familygram.online."
+    ttl: 600
+    type: CNAME
+    zoneIdRef:
+      name: yc-courses

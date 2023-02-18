@@ -1,2 +1,6 @@
 subnetId:
 certificateId:
+ingressIp: 
+ingressGroup: 
+ingressHost:
+securityGroup:
