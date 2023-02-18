@@ -1,5 +1,7 @@
 yc managed-kubernetes cluster start kube-infra
 yc managed-kubernetes cluster start kube-prod
+yc application-load-balancer load-balancer list
+yc application-load-balancer load-balancer start <id балансировщика>
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
