@@ -4,10 +4,13 @@ yc managed-kubernetes cluster start kube-prod
 yc application-load-balancer load-balancer list
 yc application-load-balancer load-balancer start <id балансировщика>
 
-#добавление переменных окружения для команды helm enc
+#добавление переменных окружения для команды helm secrets enc и helm secrets dec
 export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
 #Public key
 export SOPS_AGE_RECIPIENTS=age1fh20mqtv0jh6zgvu8st2qqwfx666t5a8e3pkmwzpnfghs7s7ta0qf3d2lj
+
+#удаление файлов .dec
+helm secrets clean .
 
  #настройка argocd
 kubectl port-forward svc/argocd-server -n argocd 8080:443
