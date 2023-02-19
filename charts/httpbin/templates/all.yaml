@@ -35,32 +35,32 @@ spec:
       targetPort: 80
       protocol: TCP
       nodePort: 30081
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: httpbin
-  annotations:
-    ingress.alb.yc.io/subnets: {{ .Values.subnetId }}
-    ingress.alb.yc.io/external-ipv4-address: 158.160.27.71
-    ingress.alb.yc.io/group-name: infra-ingress
-    ingress.alb.yc.io/security-groups: enpvl0emsutk92o38nhu
-spec:
-  tls:
-    - hosts:
-        - "httpbin.infra.familygram.online"
-      secretName: yc-certmgr-cert-id-{{ .Values.certificateId }}
-  rules:
-    - host: httpbin.infra.familygram.online
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: httpbin
-                port:
-                  number: 80
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: httpbin
+#   annotations:
+#     ingress.alb.yc.io/subnets: {{ .Values.subnetId }}
+#     ingress.alb.yc.io/external-ipv4-address: 158.160.27.71
+#     ingress.alb.yc.io/group-name: infra-ingress
+#     ingress.alb.yc.io/security-groups: enpvl0emsutk92o38nhu
+# spec:
+#   tls:
+#     - hosts:
+#         - "httpbin.infra.familygram.online"
+#       secretName: yc-certmgr-cert-id-{{ .Values.certificateId }}
+#   rules:
+#     - host: httpbin.infra.familygram.online
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: httpbin
+#                 port:
+#                   number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
