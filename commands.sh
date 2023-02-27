@@ -12,7 +12,7 @@ export SOPS_AGE_RECIPIENTS=age1fh20mqtv0jh6zgvu8st2qqwfx666t5a8e3pkmwzpnfghs7s7t
 #удаление файлов .dec
 helm secrets clean .
 
- #настройка argocd
+#настройка argocd
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
