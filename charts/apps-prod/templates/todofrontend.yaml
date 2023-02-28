@@ -4,6 +4,9 @@ metadata:
   name: todofrontend
   # Обратите внимание на namespace – он должен быть argocd
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: front=cr.yandex/crprffsa8b7s8c1kbrus/yc-courses/todofrontend
+    argocd-image-updater.argoproj.io/front.update-strategy: latest
 spec:
   destination:
     # А вот тут уже неймспейс, куда будет устанавливаться сам чарт
